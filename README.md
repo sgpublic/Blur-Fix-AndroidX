@@ -18,7 +18,7 @@ This results in an average work/frame time of 2-4ms, which will be a seamless ex
 ## Setup
 Add __BlurKit__ to your dependencies block:
 ```groovy
-compile 'com.wonderkiln:blurkit:1.0.0'
+implementation 'com.github.SGPublic:Blur-Fix-AndroidX:1.1.0'
 ```
 
 You also need to add __RenderScript__ to your app module. Add these lines to the `defaultConfig` block of your __build.gradle__.
@@ -33,7 +33,7 @@ renderscriptSupportModeEnabled true
 Add a `BlurLayout` to your layout just like any other view.
 
 ```xml
-<com.wonderkiln.blurkit.BlurLayout
+<com.sgpublic.blurfixandroidx.BlurLayout
     android:id="@+id/blurLayout"
     android:layout_width="150dp"
     android:layout_height="150dp">
@@ -45,13 +45,13 @@ Add a `BlurLayout` to your layout just like any other view.
         android:text="BlurKit!"
         android:textColor="@android:color/white" />
 
-</com.wonderkiln.blurkit.BlurLayout>
+</com.sgpublic.blurfixandroidx.BlurLayoutt>
 ```
 
 The layout background will continuously blur the content behind it. If you know your background content will be somewhat static, you can set the layout `fps` to `0`. At any time you can re-blur the background content by calling `invalidate()` on the `BlurLayout`. 
 
 ```xml
-<com.wonderkiln.blurkit.BlurLayout xmlns:blurkit="http://schemas.android.com/apk/res-auto"
+<com.sgpublic.blurfixandroidx.BlurLayout xmlns:blurkit="http://schemas.android.com/apk/res-auto"
     android:id="@+id/blurLayout"
     android:layout_width="150dp"
     android:layout_height="150dp"
@@ -61,7 +61,7 @@ The layout background will continuously blur the content behind it. If you know 
 Other attributes you can configure are the blur radius and the downscale factor. Getting these to work together well can take some experimentation. The downscale factor is a performance optimization; the bitmap for the background content will be downsized by this factor before being drawn and blurred.
 
 ```xml
-<com.wonderkiln.blurkit.BlurLayout xmlns:blurkit="http://schemas.android.com/apk/res-auto"
+<com.sgpublic.blurfixandroidx.BlurLayout xmlns:blurkit="http://schemas.android.com/apk/res-auto"
     android:id="@+id/blurLayout"
     android:layout_width="150dp"
     android:layout_height="150dp"
@@ -102,13 +102,10 @@ BlurKit.getInstance().fastBlur(View src, int radius, float downscaleFactor);
 If you use Proguard, add the following to your proguard-rules.pro:
 
 ```
--keep class com.wonderkiln.blurkit.** { *; }
+-keep class com.sgpublic.blurfixandroidx.** { *; }
 
--dontwarn android.support.v8.renderscript.*
--keepclassmembers class android.support.v8.renderscript.RenderScript {
-  native *** rsn*(...);
-  native *** n*(...);
-}
+-dontwarn android.renderscript.*
+-keep public class androidx.renderscript.* { *; }
 ```
 
 ## To Do (incoming!)
