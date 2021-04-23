@@ -16,9 +16,23 @@ BlurKit is faster than other blurring libraries due to a number of bitmap retrie
 This results in an average work/frame time of 2-4ms, which will be a seamless experience for most users and apps.
 
 ## Setup
-Add __BlurKit__ to your dependencies block:
+Add it in your root build.gradle at the end of repositories:
+
 ```groovy
-implementation 'com.github.SGPublic:Blur-Fix-AndroidX:1.1.0'
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
+Add the dependency
+
+```groovy
+	dependencies {
+	        implementation 'com.github.SGPublic:Blur-Fix-AndroidX:1.1.0'
+	}
 ```
 
 You also need to add __RenderScript__ to your app module. Add these lines to the `defaultConfig` block of your __build.gradle__.

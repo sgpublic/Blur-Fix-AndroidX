@@ -51,7 +51,7 @@ public class BlurKit {
         Bitmap bitmap = Bitmap.createBitmap(
                 (int) (src.getWidth() * downscaleFactor),
                 (int) (src.getHeight() * downscaleFactor),
-                Bitmap.Config.ARGB_8888
+                Bitmap.Config.ARGB_4444
         );
 
         Canvas canvas = new Canvas(bitmap);
