@@ -4,8 +4,7 @@ plugins {
     id 'maven'
 }
 
-group 'io.github.sgpublic'
-version '1.1.0'
+group = 'com.github.sgpublic'
 
 android {
     compileSdkVersion 30
