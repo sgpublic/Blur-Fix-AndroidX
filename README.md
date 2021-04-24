@@ -31,14 +31,14 @@ Add the dependency
 
 ```groovy
 	dependencies {
-	        implementation 'com.github.SGPublic:Blur-Fix-AndroidX:1.1.1'
+	        implementation 'com.github.SGPublic:Blur-Fix-AndroidX:1.1.2'
 	}
 ```
 
 You also need to add __RenderScript__ to your app module. Add these lines to the `defaultConfig` block of your __build.gradle__.
 
 ```groovy
-renderscriptTargetApi 24
+renderscriptTargetApi 25
 renderscriptSupportModeEnabled true
 ```
 
