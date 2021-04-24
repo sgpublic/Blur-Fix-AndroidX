@@ -44,6 +44,15 @@ public class BlurLayout extends FrameLayout {
     /** Reference to View for top-parent. For retrieval see {@link #getActivityView() getActivityView}. */
     private WeakReference<View> mActivityView;
 
+    /** Choreographer callback that re-draws the blur and schedules another callback. */
+    private final Choreographer.FrameCallback invalidationLoop = new Choreographer.FrameCallback() {
+        @Override
+        public void doFrame(long frameTimeNanos) {
+            invalidate();
+            Choreographer.getInstance().postFrameCallbackDelayed(this, 1000 / mFPS);
+        }
+    };
+
     public BlurLayout(Context context) {
         super(context, null);
     }
@@ -66,14 +75,6 @@ public class BlurLayout extends FrameLayout {
         }
 
         if (mFPS > 0) {
-            /** Choreographer callback that re-draws the blur and schedules another callback. */
-            Choreographer.FrameCallback invalidationLoop = new Choreographer.FrameCallback() {
-                @Override
-                public void doFrame(long frameTimeNanos) {
-                    invalidate();
-                    Choreographer.getInstance().postFrameCallbackDelayed(this, 1000 / mFPS);
-                }
-            };
             Choreographer.getInstance().postFrameCallback(invalidationLoop);
         }
     }
@@ -86,7 +87,7 @@ public class BlurLayout extends FrameLayout {
         super.invalidate();
         Bitmap bitmap = blur();
         if (bitmap != null) {
-            setBackground(new BitmapDrawable(bitmap));
+            setBackground(new BitmapDrawable(getResources(), bitmap));
         }
     }
 
@@ -282,7 +283,9 @@ public class BlurLayout extends FrameLayout {
      * See {@link #mFPS}.
      */
     public void setFPS(int fps) {
+        if (fps <= 0){
+            Choreographer.getInstance().removeFrameCallback(invalidationLoop);
+        }
         this.mFPS = fps;
     }
-
 }
