@@ -283,9 +283,10 @@ public class BlurLayout extends FrameLayout {
      * See {@link #mFPS}.
      */
     public void setFPS(int fps) {
-        if (fps <= 0){
-            Choreographer.getInstance().removeFrameCallback(invalidationLoop);
+        Choreographer.getInstance().removeFrameCallback(invalidationLoop);
+        if (fps > 0){
+            this.mFPS = fps;
+            Choreographer.getInstance().postFrameCallback(invalidationLoop);
         }
-        this.mFPS = fps;
     }
 }
